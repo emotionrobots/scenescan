@@ -1,16 +1,16 @@
 //
-//  ViewController.swift
+//  RenderViewController.swift
 //  SceneScan
 //
 //  Created by Larry Li on 12/13/21.
 //
-
 import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
 
+class RenderViewController: UIViewController, ARSCNViewDelegate {
+         
     @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         
         // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        sceneView.showsStatistics = false
         
         // Create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -46,6 +46,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.pause()
     }
 
+    @IBAction func onBackBtn(_ sender: UIButton) {
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let renderViewController = storyBoard.instantiateViewController(withIdentifier: "captureVC") as! CaptureViewController
+        self.present(renderViewController, animated:true, completion:nil)
+    }
+    
+    /// Export model file
+    @IBAction func exportBtn(_ sender: UIButton) {
+    }
+    
+    
     // MARK: - ARSCNViewDelegate
     
 /*
